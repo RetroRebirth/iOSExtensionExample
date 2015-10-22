@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B96CB4F1BD958F60034982F /* extension_js in Resources */ = {isa = PBXBuildFile; fileRef = 4B96CB4E1BD958F60034982F /* extension_js */; settings = {ASSET_TAGS = (); }; };
+		4B96CB511BD96B960034982F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B96CB501BD96B960034982F /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 		4BB410C51BD7350B00D989C3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB410C41BD7350B00D989C3 /* AppDelegate.swift */; };
 		4BB410C71BD7350B00D989C3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB410C61BD7350B00D989C3 /* ViewController.swift */; };
 		4BB410CA1BD7350B00D989C3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BB410C81BD7350B00D989C3 /* Main.storyboard */; };
@@ -58,6 +60,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4B96CB4E1BD958F60034982F /* extension_js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = extension_js; sourceTree = "<group>"; };
+		4B96CB501BD96B960034982F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4BB410C11BD7350B00D989C3 /* iOSExtensionExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSExtensionExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BB410C41BD7350B00D989C3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BB410C61BD7350B00D989C3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 				4BB410F81BD7354800D989C3 /* ActionViewController.swift */,
 				4BB410FA1BD7354800D989C3 /* MainInterface.storyboard */,
 				4BB410FD1BD7354800D989C3 /* Info.plist */,
+				4B96CB501BD96B960034982F /* Images.xcassets */,
+				4B96CB4E1BD958F60034982F /* extension_js */,
 			);
 			path = MeterFeet;
 			sourceTree = "<group>";
@@ -258,6 +264,12 @@
 				TargetAttributes = {
 					4BB410C01BD7350B00D989C3 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = L9GDAR3R36;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					4BB410D41BD7350B00D989C3 = {
 						CreatedOnToolsVersion = 7.0.1;
@@ -322,7 +334,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B96CB511BD96B960034982F /* Images.xcassets in Resources */,
 				4BB410FC1BD7354800D989C3 /* MainInterface.storyboard in Resources */,
+				4B96CB4F1BD958F60034982F /* extension_js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,11 +511,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iOSExtensionExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.christopherwilliams.iOSExtensionExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -509,11 +526,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = iOSExtensionExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.christopherwilliams.iOSExtensionExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -606,6 +626,7 @@
 				4BB410EB1BD7350B00D989C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4BB410EC1BD7350B00D989C3 /* Build configuration list for PBXNativeTarget "iOSExtensionExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -614,6 +635,7 @@
 				4BB410EE1BD7350B00D989C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4BB410EF1BD7350B00D989C3 /* Build configuration list for PBXNativeTarget "iOSExtensionExampleUITests" */ = {
 			isa = XCConfigurationList;
@@ -622,6 +644,7 @@
 				4BB410F11BD7350B00D989C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4BB411011BD7354800D989C3 /* Build configuration list for PBXNativeTarget "MeterFeet" */ = {
 			isa = XCConfigurationList;
@@ -630,6 +653,7 @@
 				4BB411031BD7354800D989C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

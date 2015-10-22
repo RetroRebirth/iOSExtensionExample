@@ -1,6 +1,7 @@
 //
 //  ActionViewController.swift
 //  MeterFeet
+//  source: http://swiftiostutorials.com/tutorial-creating-ios-app-extension-ios-8-perform-custom-actions-safari-content/
 //
 //  Created by Christopher Williams on 10/20/15.
 //  Copyright © 2015 Christopher Williams. All rights reserved.
@@ -10,53 +11,77 @@ import UIKit
 import MobileCoreServices
 
 class ActionViewController: UIViewController {
-
-    @IBOutlet weak var imageView: UIImageView!
-
+    
+    let feetsInMeter = 3.28084
+    let metersInFoot = 0.3048
+    var jsString = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        // Get the item[s] we're handling from the extension context.
         
-        // For example, look for an image and place it into an image view.
-        // Replace this with something appropriate for the type[s] your extension supports.
-        var imageFound = false
         for item: AnyObject in self.extensionContext!.inputItems {
             let inputItem = item as! NSExtensionItem
+            
             for provider: AnyObject in inputItem.attachments! {
+                
                 let itemProvider = provider as! NSItemProvider
-                if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
-                    // This is an image. We'll load it, then place it in our image view.
-                    weak var weakImageView = self.imageView
-                    itemProvider.loadItemForTypeIdentifier(kUTTypeImage as String, options: nil, completionHandler: { (image, error) in
-                        NSOperationQueue.mainQueue().addOperationWithBlock {
-                            if let strongImageView = weakImageView {
-                                strongImageView.image = image as? UIImage
-                            }
-                        }
-                    })
+                
+                if itemProvider.hasItemConformingToTypeIdentifier(kUTTypePropertyList as String) {
                     
-                    imageFound = true
-                    break
+                    itemProvider.loadItemForTypeIdentifier(kUTTypePropertyList as String, options: nil, completionHandler: { [unowned self] (result: NSSecureCoding?, error: NSError!) -> Void in
+                        
+                        if let resultDict = result as? NSDictionary {
+                            
+                            self.jsString = resultDict[NSExtensionJavaScriptPreprocessingResultsKey]!["content"] as! String
+                        }
+                        });
                 }
             }
-            
-            if (imageFound) {
-                // We only handle one image, so stop looking for more.
-                break
-            }
         }
+    }
+    
+    func performConversion(regexPattern: String, replacementString: String, multiplier: Double) {
+        do {
+            let regex = try NSRegularExpression(pattern: regexPattern, options: .CaseInsensitive)
+            
+            let matches = regex.matchesInString(jsString, options: NSMatchingOptions(rawValue: 0), range: NSMakeRange(0, jsString.characters.count))
+            
+            for result in matches.reverse() as [NSTextCheckingResult] {
+                let match = regex.replacementStringForResult(result, inString: jsString, offset: 0, template: "$0")
+                
+                let convertsionResult = (match as NSString).doubleValue * multiplier;
+                let replacement = String(format: replacementString, arguments: [convertsionResult])
+                
+                jsString = jsString.stringByReplacingOccurrencesOfString(match, withString: replacement)
+            }
+        } catch {
+            print("conversion failed")
+        }
+    }
+    
+    @IBAction func convertMetersToFt() {
+        performConversion("(([-+]?[0-9]*\\.?[0-9]+)\\s*(m))", replacementString: "%.2f ft", multiplier: feetsInMeter)
+        finalizeReplace()
+    }
+    
+    @IBAction func convertFtToMeters() {
+        performConversion("(([-+]?[0-9]*\\.?[0-9]+)\\s*(ft))", replacementString: "%.2f m", multiplier: metersInFoot)
+        finalizeReplace()
+    }
+    
+    @IBAction func finalizeReplace() {
+        let extensionItem = NSExtensionItem()
+        
+        let item = NSDictionary(object: NSDictionary(object: jsString, forKey: "content"), forKey: "NSExtensionJavaScriptFinalizeArgumentKey")
+        
+        let itemProvider = NSItemProvider(item: item, typeIdentifier: kUTTypePropertyList as String)
+        extensionItem.attachments = [itemProvider]
+        
+        self.extensionContext!.completeRequestReturningItems([extensionItem], completionHandler: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    @IBAction func done() {
-        // Return any edited content to the host app.
-        // This template doesn't do anything, so we just echo the passed in items.
-        self.extensionContext!.completeRequestReturningItems(self.extensionContext!.inputItems, completionHandler: nil)
-    }
-
 }
