@@ -4,10 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ImgurShare.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>MeterFeet.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
+		</dict>
+		<key>ShareTest.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>iOSExtensionExample.xcscheme</key>
 		<dict>
@@ -17,6 +27,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>4B96CB551BD9726C0034982F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4BB410C01BD7350B00D989C3</key>
 		<dict>
 			<key>primary</key>
@@ -33,6 +48,11 @@
 			<true/>
 		</dict>
 		<key>4BB410F51BD7354800D989C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4BC70B241BD97A0F00A12DF9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
