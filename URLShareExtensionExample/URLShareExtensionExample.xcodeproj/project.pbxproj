@@ -75,8 +75,6 @@
 		4B264F1E1BD9921F001A875C /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		4B264F211BD9921F001A875C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		4B264F231BD9921F001A875C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4BC956F91BDDA8C600EBDF66 /* URLShareExtensionExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = URLShareExtensionExample.entitlements; sourceTree = "<group>"; };
-		4BC956FA1BDDA8D200EBDF66 /* URLShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = URLShareExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +134,6 @@
 		4B264EE91BD98DD5001A875C /* URLShareExtensionExample */ = {
 			isa = PBXGroup;
 			children = (
-				4BC956F91BDDA8C600EBDF66 /* URLShareExtensionExample.entitlements */,
 				4B264EEA1BD98DD5001A875C /* AppDelegate.swift */,
 				4B264EEC1BD98DD5001A875C /* ViewController.swift */,
 				4B264EEE1BD98DD5001A875C /* Main.storyboard */,
@@ -168,7 +165,6 @@
 		4B264F1D1BD9921F001A875C /* URLShareExtension */ = {
 			isa = PBXGroup;
 			children = (
-				4BC956FA1BDDA8D200EBDF66 /* URLShareExtension.entitlements */,
 				4B264F1E1BD9921F001A875C /* ShareViewController.swift */,
 				4B264F201BD9921F001A875C /* MainInterface.storyboard */,
 				4B264F231BD9921F001A875C /* Info.plist */,
@@ -265,7 +261,7 @@
 						DevelopmentTeam = L9GDAR3R36;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -282,7 +278,7 @@
 						DevelopmentTeam = L9GDAR3R36;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -513,7 +509,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = URLShareExtensionExample/URLShareExtensionExample.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -529,7 +525,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = URLShareExtensionExample/URLShareExtensionExample.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -592,7 +588,6 @@
 		4B264F281BD9921F001A875C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = URLShareExtension/URLShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = URLShareExtension/Info.plist;
@@ -607,7 +602,6 @@
 		4B264F291BD9921F001A875C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = URLShareExtension/URLShareExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = URLShareExtension/Info.plist;
