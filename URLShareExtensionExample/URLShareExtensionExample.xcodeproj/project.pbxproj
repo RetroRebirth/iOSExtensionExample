@@ -75,8 +75,8 @@
 		4B264F1E1BD9921F001A875C /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		4B264F211BD9921F001A875C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		4B264F231BD9921F001A875C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4B264F2B1BD995BC001A875C /* URLShareExtensionExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = URLShareExtensionExample.entitlements; sourceTree = "<group>"; };
-		4B264F2C1BD995D1001A875C /* URLShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = URLShareExtension.entitlements; sourceTree = "<group>"; };
+		4BC956F91BDDA8C600EBDF66 /* URLShareExtensionExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = URLShareExtensionExample.entitlements; sourceTree = "<group>"; };
+		4BC956FA1BDDA8D200EBDF66 /* URLShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = URLShareExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +136,7 @@
 		4B264EE91BD98DD5001A875C /* URLShareExtensionExample */ = {
 			isa = PBXGroup;
 			children = (
-				4B264F2B1BD995BC001A875C /* URLShareExtensionExample.entitlements */,
+				4BC956F91BDDA8C600EBDF66 /* URLShareExtensionExample.entitlements */,
 				4B264EEA1BD98DD5001A875C /* AppDelegate.swift */,
 				4B264EEC1BD98DD5001A875C /* ViewController.swift */,
 				4B264EEE1BD98DD5001A875C /* Main.storyboard */,
@@ -168,7 +168,7 @@
 		4B264F1D1BD9921F001A875C /* URLShareExtension */ = {
 			isa = PBXGroup;
 			children = (
-				4B264F2C1BD995D1001A875C /* URLShareExtension.entitlements */,
+				4BC956FA1BDDA8D200EBDF66 /* URLShareExtension.entitlements */,
 				4B264F1E1BD9921F001A875C /* ShareViewController.swift */,
 				4B264F201BD9921F001A875C /* MainInterface.storyboard */,
 				4B264F231BD9921F001A875C /* Info.plist */,
@@ -638,6 +638,7 @@
 				4B264F111BD98DD5001A875C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B264F121BD98DD5001A875C /* Build configuration list for PBXNativeTarget "URLShareExtensionExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -646,6 +647,7 @@
 				4B264F141BD98DD5001A875C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B264F151BD98DD5001A875C /* Build configuration list for PBXNativeTarget "URLShareExtensionExampleUITests" */ = {
 			isa = XCConfigurationList;
@@ -654,6 +656,7 @@
 				4B264F171BD98DD5001A875C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B264F271BD9921F001A875C /* Build configuration list for PBXNativeTarget "URLShareExtension" */ = {
 			isa = XCConfigurationList;
@@ -662,6 +665,7 @@
 				4B264F291BD9921F001A875C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

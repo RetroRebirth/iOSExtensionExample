@@ -6,8 +6,10 @@
 //  Copyright © 2015 Christopher Williams. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import Social
+import MobileCoreServices
 
 class ShareViewController: SLComposeServiceViewController {
 
@@ -18,15 +20,21 @@ class ShareViewController: SLComposeServiceViewController {
 
     override func didSelectPost() {
         // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
-    
-        let sharedDefaults = NSUserDefaults(suiteName: "group.me.christopherwilliams.iOSExtensionExample")
+//        let sharedDefaults = NSUserDefaults(suiteName: "group.me.christopherwilliams.iOSExtensionExample")
         
-        sharedDefaults?.setObject(self.contentText, forKey: "stringKey")
+        let inputItem = self.extensionContext!.inputItems[0] as! NSExtensionItem
+        let itemProvider = inputItem.attachments![0] as! NSItemProvider
         
-        sharedDefaults?.synchronize()
-        
-        // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
-        self.extensionContext!.completeRequestReturningItems([], completionHandler: nil)
+        if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
+            itemProvider.loadItemForTypeIdentifier(kUTTypeURL as String, options: nil, completionHandler: { (item, error) in
+                print(item!)
+//                sharedDefaults?.setObject(item, forKey: "stringKey")
+//                
+//                sharedDefaults?.synchronize()
+//                
+//                self.extensionContext!.completeRequestReturningItems([], completionHandler: nil)
+            })
+        }
     }
 
     override func configurationItems() -> [AnyObject]! {
