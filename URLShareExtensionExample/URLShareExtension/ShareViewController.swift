@@ -12,7 +12,7 @@ import Social
 import MobileCoreServices
 
 class ShareViewController: SLComposeServiceViewController {
-
+    
     override func isContentValid() -> Bool {
         // Do validation of contentText and/or NSExtensionContext attachments here
         return true
@@ -25,7 +25,13 @@ class ShareViewController: SLComposeServiceViewController {
         
         if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
             itemProvider.loadItemForTypeIdentifier(kUTTypeURL as String, options: nil, completionHandler: { (item, error) in
-                print(item)
+                let url = (item as! NSURL).absoluteString
+                
+                let sharedDefaults = NSUserDefaults(suiteName: "group.me.christopherwilliams.iOSExtensionExample")
+                
+                sharedDefaults?.setObject(url, forKey: "urlKey")
+                
+                sharedDefaults?.synchronize()
                 
                 self.extensionContext?.completeRequestReturningItems([], completionHandler: nil)
             })

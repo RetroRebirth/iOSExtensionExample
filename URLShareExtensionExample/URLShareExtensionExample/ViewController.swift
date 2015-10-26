@@ -18,11 +18,11 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewDidAppear(animated)   
         
-//        let sharedDefaults = NSUserDefaults(suiteName: "group.me.christopherwilliams.iOSExtensionExample")
-//        
-//        self.label.text = sharedDefaults?.objectForKey("stringKey") as? String
+        let sharedDefaults = NSUserDefaults(suiteName: "group.me.christopherwilliams.iOSExtensionExample")
+        
+        self.label.text = sharedDefaults?.objectForKey("urlKey") as? String
     }
 
     override func didReceiveMemoryWarning() {
