@@ -13,6 +13,8 @@ import MobileCoreServices
 
 class ShareViewController: SLComposeServiceViewController {
     
+    var url = ""
+    
     override func isContentValid() -> Bool {
         // Do validation of contentText and/or NSExtensionContext attachments here
         return true
@@ -23,14 +25,16 @@ class ShareViewController: SLComposeServiceViewController {
         let inputItem = self.extensionContext!.inputItems[0] as! NSExtensionItem
         let itemProvider = inputItem.attachments![0] as! NSItemProvider
         
+        // Are we sharing something with a URL attached to it?
         if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
+            // If so, start a worker thread to grab the URL
             itemProvider.loadItemForTypeIdentifier(kUTTypeURL as String, options: nil, completionHandler: { (item, error) in
-                let url = (item as! NSURL).absoluteString
+                // Parse the URL as a string
+                self.url = (item as! NSURL).absoluteString
                 
+                // Save the URL to be rendered in app
                 let sharedDefaults = NSUserDefaults(suiteName: "group.me.christopherwilliams.iOSExtensionExample")
-                
-                sharedDefaults?.setObject(url, forKey: "urlKey")
-                
+                sharedDefaults?.setObject(self.url, forKey: "urlKey")
                 sharedDefaults?.synchronize()
                 
                 self.extensionContext?.completeRequestReturningItems([], completionHandler: nil)
@@ -40,6 +44,14 @@ class ShareViewController: SLComposeServiceViewController {
 
     override func configurationItems() -> [AnyObject]! {
         // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
+
+        // TODO alter share composition UI to include title, description, and pricing
+//        let test:SLComposeSheetConfigurationItem = SLComposeSheetConfigurationItem()
+//        test.title = "test"
+//        test.value = "Hello world!"
+//        
+//        return [test]
+        
         return []
     }
 
