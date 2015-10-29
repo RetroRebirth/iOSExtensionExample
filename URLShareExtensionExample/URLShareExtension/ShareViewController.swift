@@ -11,7 +11,7 @@ import UIKit
 import Social
 import MobileCoreServices
 
-class ShareViewController: SLComposeServiceViewController {
+class ShareViewController: SLComposeServiceViewController, NSURLSessionDelegate {
     
     var url = ""
     
@@ -37,7 +37,30 @@ class ShareViewController: SLComposeServiceViewController {
                 sharedDefaults?.setObject(self.url, forKey: "urlKey")
                 sharedDefaults?.synchronize()
                 
-                self.extensionContext?.completeRequestReturningItems([], completionHandler: nil)
+                // Run NSURLSession to send info to Treasure backend
+                // http://jamesonquave.com/blog/making-a-post-request-in-swift/#jumpSwift
+                let params = ["auth_token":"X9DSUoksFskqPTm14BbXoV1Q", "url":self.url] as Dictionary<String, String>
+                
+                let request = NSMutableURLRequest(URL: NSURL(string: "http://shop.treasureapp.com/api/v1/products")!)
+                request.HTTPMethod = "POST"
+                do {
+                    request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: [])
+                } catch {
+                    print("error in JSON serialization")
+                }
+                request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+                request.addValue("application/json", forHTTPHeaderField: "Accept")
+                
+                let session = NSURLSession.sharedSession()
+                
+                let task = session.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+                    print("Response: \(response)")
+                    
+                    // TODO process response
+                    
+                    self.extensionContext?.completeRequestReturningItems([], completionHandler: nil)
+                })
+                task.resume()
             })
         }
     }
@@ -49,10 +72,26 @@ class ShareViewController: SLComposeServiceViewController {
 //        let test:SLComposeSheetConfigurationItem = SLComposeSheetConfigurationItem()
 //        test.title = "test"
 //        test.value = "Hello world!"
+//        test.tapHandler = { () in
+//            let vc = ItemViewController() // TODO not working
+//            self.pushConfigurationViewController(vc)
+//        }
 //        
 //        return [test]
         
         return []
+    }
+    
+    func URLSession(session: NSURLSession, didBecomeInvalidWithError error: NSError?) {
+        print("error :(")
+    }
+    
+    func URLSessionDidFinishEventsForBackgroundURLSession(session: NSURLSession) {
+        print("finished!")
+    }
+    
+    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+        print("received authorization challenge")
     }
 
 }
