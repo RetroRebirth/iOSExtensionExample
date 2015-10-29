@@ -14,12 +14,13 @@ import MobileCoreServices
 class ShareViewController: SLComposeServiceViewController, NSURLSessionDelegate {
     
     var url = ""
+    let debug = false // Print out debug information
     
     override func isContentValid() -> Bool {
         // Do validation of contentText and/or NSExtensionContext attachments here
         return true
     }
-
+    
     override func didSelectPost() {
         // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
         let inputItem = self.extensionContext!.inputItems[0] as! NSExtensionItem
@@ -37,8 +38,8 @@ class ShareViewController: SLComposeServiceViewController, NSURLSessionDelegate 
                 sharedDefaults?.setObject(self.url, forKey: "urlKey")
                 sharedDefaults?.synchronize()
                 
-                // Run NSURLSession to send info to Treasure backend
-                // http://jamesonquave.com/blog/making-a-post-request-in-swift/#jumpSwift
+                // Send POST to Treasure backend: http://jamesonquave.com/blog/making-a-post-request-in-swift/#jumpSwift
+                // TODO receive auth_token, name, description, and base_price_cents params
                 let params = ["auth_token":"X9DSUoksFskqPTm14BbXoV1Q", "url":self.url] as Dictionary<String, String>
                 
                 let request = NSMutableURLRequest(URL: NSURL(string: "http://shop.treasureapp.com/api/v1/products")!)
@@ -46,7 +47,7 @@ class ShareViewController: SLComposeServiceViewController, NSURLSessionDelegate 
                 do {
                     request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: [])
                 } catch {
-                    print("error in JSON serialization")
+                    print("Unable to serialize params into JSON. Check to see if parameters are correctly formatted?")
                 }
                 request.addValue("application/json", forHTTPHeaderField: "Content-Type")
                 request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -54,9 +55,34 @@ class ShareViewController: SLComposeServiceViewController, NSURLSessionDelegate 
                 let session = NSURLSession.sharedSession()
                 
                 let task = session.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
-                    print("Response: \(response)")
+                    print("Share extension response status code : \((response as! NSHTTPURLResponse).statusCode)")
                     
-                    // TODO process response
+                    if self.debug {
+                        print("Response: \(response)")
+                        
+                        let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                        print("Body: \(strData)")
+                        var json: AnyObject?
+                        do {
+                            json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? NSDictionary
+                        } catch {
+                            print("error in JSON serialization post processing")
+                        }
+                        
+                        if json != nil {
+                            // The JSONObjectWithData constructor didn't return an error. But, we should still check and make sure that json has a value using optional binding.
+                            if let parseJSON = json {
+                                // Okay, the parsedJSON is here, let's get the value for 'success' out of it
+                                let success = parseJSON["success"] as? Int
+                                print("Succes: \(success)")
+                            }
+                            else {
+                                // Woa, okay the json object was nil, something went worng. Maybe the server isn't running?
+                                let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                                print("Error could not parse JSON: \(jsonStr)")
+                            }
+                        }
+                    }
                     
                     self.extensionContext?.completeRequestReturningItems([], completionHandler: nil)
                 })
@@ -64,20 +90,20 @@ class ShareViewController: SLComposeServiceViewController, NSURLSessionDelegate 
             })
         }
     }
-
+    
     override func configurationItems() -> [AnyObject]! {
         // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
-
+        
         // TODO alter share composition UI to include title, description, and pricing
-//        let test:SLComposeSheetConfigurationItem = SLComposeSheetConfigurationItem()
-//        test.title = "test"
-//        test.value = "Hello world!"
-//        test.tapHandler = { () in
-//            let vc = ItemViewController() // TODO not working
-//            self.pushConfigurationViewController(vc)
-//        }
-//        
-//        return [test]
+        //        let test:SLComposeSheetConfigurationItem = SLComposeSheetConfigurationItem()
+        //        test.title = "test"
+        //        test.value = "Hello world!"
+        //        test.tapHandler = { () in
+        //            let vc = ItemViewController() // TODO not working
+        //            self.pushConfigurationViewController(vc)
+        //        }
+        //
+        //        return [test]
         
         return []
     }
@@ -93,5 +119,5 @@ class ShareViewController: SLComposeServiceViewController, NSURLSessionDelegate 
     func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
         print("received authorization challenge")
     }
-
+    
 }

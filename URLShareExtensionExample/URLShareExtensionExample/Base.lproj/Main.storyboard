@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,48 +17,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3SW-Sv-47e">
-                                <rect key="frame" x="20" y="289" width="560" height="21"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="212" width="360" height="176"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Most recent shared URL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgL-rz-LUY">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Most recent shared URL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgL-rz-LUY">
                                 <rect key="frame" x="207" y="250" width="186" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="diY-bk-ryi">
+                                <rect key="frame" x="279" y="289" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3SW-Sv-47e" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="P6h-24-xp6"/>
-                            <constraint firstItem="3SW-Sv-47e" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bFd-OG-NZx"/>
-                            <constraint firstItem="3SW-Sv-47e" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cm1-Gq-ofy"/>
+                            <constraint firstItem="diY-bk-ryi" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="0bn-Ag-zfZ"/>
+                            <constraint firstItem="diY-bk-ryi" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="J0P-ab-XBv"/>
+                            <constraint firstItem="diY-bk-ryi" firstAttribute="top" secondItem="lgL-rz-LUY" secondAttribute="bottom" constant="18" id="Lse-EF-BKB"/>
+                            <constraint firstItem="lgL-rz-LUY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="j28-zX-pJf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="diY-bk-ryi" secondAttribute="trailing" constant="20" id="orq-mt-VWY"/>
+                            <constraint firstItem="diY-bk-ryi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="p6b-SP-QUF"/>
+                            <constraint firstItem="diY-bk-ryi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="wB4-Y3-KuV"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="bFd-OG-NZx"/>
-                                <exclude reference="cm1-Gq-ofy"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="bFd-OG-NZx"/>
-                                <include reference="cm1-Gq-ofy"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
-                        <outlet property="label" destination="3SW-Sv-47e" id="XO1-54-wjv"/>
+                        <outlet property="label" destination="diY-bk-ryi" id="mNe-F8-t4P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="244.5" y="337"/>
+            <point key="canvasLocation" x="244" y="337"/>
         </scene>
     </scenes>
 </document>
