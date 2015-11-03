@@ -18,6 +18,12 @@ class ShareViewController: SLComposeServiceViewController, NSURLSessionDelegate 
     
     override func isContentValid() -> Bool {
         // Do validation of contentText and/or NSExtensionContext attachments here
+        
+        // Convert text window to non-editable confirmation window
+        textView.editable = false
+        textView.text = "Share this product?"
+        textView.textColor = UIColor.grayColor()
+        
         return true
     }
     
